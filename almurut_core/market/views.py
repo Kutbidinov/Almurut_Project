@@ -52,8 +52,7 @@ class ProductListView(TemplateView):
 
 
 
-class RegisterView(TemplateView):
-    template_name = 'register.html'
+
 
 
 

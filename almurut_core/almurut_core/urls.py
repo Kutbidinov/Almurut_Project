@@ -18,7 +18,10 @@ from django.contrib import admin
 from django.urls import path
 
 from market.views import HomeView, Custom404View, FaqView, FavoritesView, LoginView, ProductDetailView, ProductListView, \
-    RegisterView, ShoppingCartView
+     ShoppingCartView
+
+
+from users.views import UserRegisterView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,6 +32,7 @@ urlpatterns = [
     path('login_page/', LoginView.as_view(), name = 'login_page'),
     path('product_detail/', ProductDetailView.as_view(), name = 'product_detail_list'),
     path('product_list/', ProductListView.as_view(), name = 'product_list'),
-    path('register_page/', RegisterView.as_view(), name = 'register_page'),
-    path('shopping_cart/', ShoppingCartView.as_view(), name = 'shopping_cart_list' )
+    path('register_page/', UserRegisterView.as_view(), name = 'register_page'),
+    path('shopping_cart/', ShoppingCartView.as_view(), name = 'shopping_cart_list' ),
+    path('make-registration')
 ]
