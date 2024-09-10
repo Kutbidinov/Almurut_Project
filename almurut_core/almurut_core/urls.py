@@ -14,26 +14,31 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
-from market.views import (HomeView, Custom404View, FaqView,
-                          FavoritesView, LoginView, ProductDetailView,
-                          ProductListView,  ShoppingCartView,)
+from market.views import Page404View, PageFagView, PageFavoritesView, PageHomeView, ProductListView,\
+    ProductDetailView, ShopingCartView
 
-
-from users.views import (UserRegisterView)
+from users.views import UserRegisterView, LoginView, UserMakeRegistrationView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('404_error/', Custom404View.as_view(), name = '404_error'),
-    path('faq_page/', FaqView.as_view(), name = 'faq_page'),
-    path('favorites/', FavoritesView.as_view(), name = 'favorites_list'),
-    path('home/', HomeView.as_view(), name = 'home'),
-    path('login_page/', LoginView.as_view(), name = 'login_page'),
-    path('product_detail/', ProductDetailView.as_view(), name = 'product_detail_list'),
-    path('product_list/', ProductListView.as_view(), name = 'product_list'),
-    path('register_page/', UserRegisterView.as_view(), name = 'register_page'),
-    path('shopping_cart/', ShoppingCartView.as_view(), name = 'shopping_cart_list' ),
-    path('make-registration')
+    path('404_error/', Page404View.as_view(), name='page_404_url'),
+    path('page_fag/', PageFagView.as_view(), name='fag_page)url'),
+    path('favoriets_page/', PageFavoritesView.as_view(), name='favoriets_url'),
+    path('home/', PageHomeView.as_view(), name='home_url'),
+    path('Login_page/', LoginView.as_view(), name='login_url'),
+    path('produts/', ProductListView.as_view(), name='products_url'),
+    path('products_detail/', ProductDetailView.as_view(), name='detail_url'),
+    path('register/', UserRegisterView.as_view(), name='register_url'),
+    path('user_registration/', UserMakeRegistrationView.as_view(), name='make_registration_url'),
+    path('shoping_page/', ShopingCartView.as_view(), name='shoping_url'),
+
+
 ]
+
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

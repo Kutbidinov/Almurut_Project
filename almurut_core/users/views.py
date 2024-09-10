@@ -5,8 +5,16 @@ from django.views.generic import TemplateView
 from users.models import CustomUser
 
 
+class LoginView(TemplateView):
+    template_name = 'login.html'
+
+
+
+
 class UserRegisterView(TemplateView):
     template_name = 'register.html'
+
+
 
 
 class UserMakeRegistrationView(View):

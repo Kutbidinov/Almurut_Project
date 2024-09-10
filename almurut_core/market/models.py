@@ -10,7 +10,6 @@ class ProductCategory(models.Model):
         verbose_name_plural = "Категория Товаров"
         verbose_name = "Категория Товара"
 
-
     def __str__(self):
         return self.name
 
@@ -34,7 +33,6 @@ class Product(models.Model):
 
     new_expiry_date = models.DateField()
 
-
     class Meta:
         verbose_name_plural = "Товары"
         verbose_name = "Товар"
@@ -52,11 +50,9 @@ class ProductGallery(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='gallery')
     image = models.ImageField(upload_to='image_products')
 
-
     class Meta:
         verbose_name_plural = 'Товары с Изображениями'
         verbose_name = 'Товар с Изображениям'
-
 
 
 class User(models.Model):
