@@ -25,8 +25,8 @@ class Product(models.Model):
     seles_persent = models.PositiveSmallIntegerField(verbose_name="Само скидка",
                                                      null=True,
                                                      blank=True,
-                                                     validators=[MaxValueValidator(100)]
-                                                      )
+                                                     validators=[MaxValueValidator(100)])
+
 
 
     description = models.TextField()
