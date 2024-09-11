@@ -145,7 +145,9 @@ STATIC_ROOT = 'static' # Чтобы python manage.py collectatic сработа!
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+
 from .local_settings import SECRET_KEY
+
 
 
 USE_I18N =True

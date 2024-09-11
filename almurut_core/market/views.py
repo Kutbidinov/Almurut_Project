@@ -42,7 +42,6 @@ class ProductDetailView(TemplateView):
 
 
 
-
 class ShopingCartView(TemplateView):
     template_name = 'shopping-cart.html'
 

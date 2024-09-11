@@ -5,6 +5,7 @@ from django.views.generic import TemplateView
 from users.models import CustomUser
 
 
+
 class LoginView(TemplateView):
     template_name = 'login.html'
 
@@ -29,10 +30,10 @@ class UserMakeRegistrationView(View):
             first_name = data['first_name']
             last_name = data['last_name']
             email = data['email_adress']
-            user = CustomUser.objects.create_user(email = email,
+            user = CustomUser.objects.create_user(email=email,
                                                   password=password2,
-                                                  first_name = first_name,
-                                                  last_name = last_name
+                                                  first_name=first_name,
+                                                  last_name=last_name
                                                   )
             return render(request, 'product-list.html')
 
