@@ -20,8 +20,9 @@ class UserRegisterView(TemplateView):
 
 class UserMakeRegistrationView(View):
     """Вью. Чтобы зарегестрировать пользователя!"""
-    def post(self, request,*args, **kwargs):
+    def post(self, request, *args, **kwargs):
         data = request.POST
+        print("ОТВЕТ \n" ,data)
 
         password1 = data['password1']
         password2 = data['password2']
@@ -29,13 +30,15 @@ class UserMakeRegistrationView(View):
         if password1 == password2:
             first_name = data['first_name']
             last_name = data['last_name']
-            email = data['email_adress']
+            email = data['email']
             user = CustomUser.objects.create_user(email=email,
                                                   password=password2,
                                                   first_name=first_name,
                                                   last_name=last_name
                                                   )
             return render(request, 'product-list.html')
+        else:
+            pass
 
 
 
