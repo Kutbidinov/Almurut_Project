@@ -22,19 +22,23 @@
             <div class="page-section mb-60">
                 <div class="container">
                     <div class="row">
+                        {% if logged_in == True %}
+                        <h1>Вы успешно залагинились!</h1>
+                        {% else %}
                         <div class="col-sm-12 col-md-12 col-xs-12 col-lg-6 mb-30">
                             <!-- Login Form s-->
-                            <form action="#" >
+                            <form action="{% url 'make_login_url' %}" method="POST">
+                                {% csrf_token %}
                                 <div class="login-form">
                                     <h4 class="login-title">Login</h4>
                                     <div class="row">
                                         <div class="col-md-12 col-12 mb-20">
                                             <label>Email Address*</label>
-                                            <input class="mb-0" type="email" placeholder="Email Address">
+                                            <input class="mb-0" type="email" name="email_address" placeholder="Email Address">
                                         </div>
                                         <div class="col-12 mb-20">
                                             <label>Password</label>
-                                            <input class="mb-0" type="password" placeholder="Password">
+                                            <input class="mb-0" type="password" name="password" placeholder="Password">
                                         </div>
                                         <div class="col-md-8">
                                             <div class="check-box d-inline-block ml-0 ml-md-2 mt-10">
@@ -53,8 +57,10 @@
                             </form>
                         </div>
                     </div>
+                    {% endif %}
                 </div>
             </div>
+
             <!-- Login Content Area End Here -->
             <!-- Begin Footer Area -->
 {% endblock %}

@@ -60,6 +60,8 @@
                             <div class="header-top-left">
                                 <ul class="phone-wrap">
                                     <li><span>Telephone Enquiry:</span><a href="#">(+123) 123 321 345</a></li>
+                                        <h3 > Hello How Are you? {{ request.user.last_name }}</h3>
+
                                 </ul>
                             </div>
                         </div>
@@ -190,6 +192,12 @@
                                         <li><a href="#">Shop</a></li>
                                         <li><a href="{% url 'faq_page' %}">FAQ</a></li>
                                         <li><a href="{% url 'register_page' %}">My account</a></li>
+                                        <li>
+                                            <form action="{% url 'user_logout_url' %}" method="POST">
+                                                {% csrf_token %}
+                                                <button type="submit" > Выйти </button>
+                                            </form>
+                                        </li>
                                     </ul>
                                 </nav>
                             </div>

@@ -21,7 +21,7 @@ from django.urls import path
 from market.views import PageHomeView, Page404View, PageFagView, PageFavoritesView, ProductDetailView, ProductListView, \
      ShopingCartView
 
-from users.views import LoginView, UserRegisterView, UserMakeRegistrationView
+from users.views import UserRegisterView, UserMakeRegistrationView, LoginView, UserMakeLogin, UserMakeLogoutViewt
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,11 +34,13 @@ urlpatterns = [
     path('shopping_cart/', ShopingCartView.as_view(), name='shopping_cart_list' ),
     path('register_page/', UserRegisterView.as_view(), name='register_page'),
     path('login_page/', LoginView.as_view(), name='login_page'),
+    path('make_login_page/', UserMakeLogin.as_view(), name='make_login_url'),
+    path('logout_page/', UserMakeLogoutViewt.as_view(), name='user_logout_url'),
+
+
 
     path('user_registration_page/', UserMakeRegistrationView.as_view(), name='make_registration_user')
 ]
 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-
