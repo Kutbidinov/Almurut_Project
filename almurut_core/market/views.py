@@ -1,3 +1,4 @@
+import datetime
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from django.shortcuts import render
@@ -6,47 +7,57 @@ from market.models import Product
 
 
 
-class Page404View(TemplateView):
+
+class HomeView(TemplateView):
+    template_name = 'index.html'
+
+    def get_context_data(self, **kwargs):
+        context = {
+            'Product': Product.objects.all(),
+        }
+        return context
+
+
+
+
+class FaqView(TemplateView):
+    template_name = 'faq.html'
+
+
+class Error404View(TemplateView):
     template_name = '404.html'
 
 
-
-
-class PageFagView(TemplateView):
-    template_name = 'fag.html'
-
-
-
-
-class PageFavoritesView(TemplateView):
+class FavoritesView(TemplateView):
     template_name = 'favorites.html'
 
 
-
-
-class PageHomeView(TemplateView):
-    template_name = 'index.html'
-
-
-
-
-class ProductListView(TemplateView):
-    template_name = 'product-list.html'
-
-
+class LoginView(TemplateView):
+    template_name = 'login.html'
 
 
 class ProductDetailView(TemplateView):
     template_name = 'product-detail.html'
 
 
+class ProductListView(TemplateView):
+    template_name = 'product-list.html'
 
 
-class ShopingCartView(TemplateView):
+    def get_context_data(self, **kwargs):
+        context = {
+            'product_list': Product.objects.all(),
+            'now': datetime.datetime.now().date(),
+
+        }
+
+        return context
+
+
+
+
+class ShoppingCartView(TemplateView):
     template_name = 'shopping-cart.html'
-
-
-
 
 
 

@@ -18,29 +18,29 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
-from market.views import PageHomeView, Page404View, PageFagView, PageFavoritesView, ProductDetailView, ProductListView, \
-     ShopingCartView
 
-from users.views import UserRegisterView, UserMakeRegistrationView, LoginView, UserMakeLogin, UserMakeLogoutViewt
+from market.views import HomeView, FaqView, Error404View, FavoritesView, \
+     ProductDetailView, ProductListView, ShoppingCartView
+
+
+from users.views import UserRegisterView, UserMakeRegisterView, \
+    UserLoginView, UserMakeLoginView
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('404_error/', Page404View.as_view(), name='404_error'),
-    path('faq_page/', PageFagView.as_view(), name='faq_page'),
-    path('favorites/', PageFavoritesView.as_view(), name='favorites_list'),
-    path('home/', PageHomeView.as_view(), name='home'),
-    path('product_detail/', ProductDetailView.as_view(), name='product_detail_list'),
-    path('product_list/', ProductListView.as_view(), name='product_list'),
-    path('shopping_cart/', ShopingCartView.as_view(), name='shopping_cart_list' ),
-    path('register_page/', UserRegisterView.as_view(), name='register_page'),
-    path('login_page/', LoginView.as_view(), name='login_page'),
-    path('make_login_page/', UserMakeLogin.as_view(), name='make_login_url'),
-    path('logout_page/', UserMakeLogoutViewt.as_view(), name='user_logout_url'),
+    path('home/', HomeView.as_view(), name='Home-url'),
+    path('faq/', FaqView.as_view(), name='Faq-url'),
+    path('204_error/', Error404View.as_view()),
+    path('favorites/', FavoritesView.as_view()),
+    path('login/', UserLoginView.as_view()),
+    path('productDetail/', ProductDetailView.as_view()),
+    path('productList/', ProductListView.as_view(), name='Shop-url'),
+    path('shoppingCart/', ShoppingCartView.as_view()),
+    path('registration/', UserRegisterView.as_view(), name='registration-url'),
+    path('make-registration/', UserMakeRegisterView.as_view(), name='make-registration-url'),
+    path('make-login/', UserMakeLoginView.as_view(), name='make-login-url')
 
-
-
-    path('user_registration_page/', UserMakeRegistrationView.as_view(), name='make_registration_user')
 ]
-
-
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
