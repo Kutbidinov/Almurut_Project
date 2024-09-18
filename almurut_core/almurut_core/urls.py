@@ -19,28 +19,6 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 
-from market.views import HomeView, FaqView, Error404View, FavoritesView, \
-     ProductDetailView, ProductListView, ShoppingCartView
 
 
-from users.views import UserRegisterView, UserMakeRegisterView, \
-    UserLoginView, UserMakeLoginView
-
-
-
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('home/', HomeView.as_view(), name='Home-url'),
-    path('faq/', FaqView.as_view(), name='Faq-url'),
-    path('204_error/', Error404View.as_view()),
-    path('favorites/', FavoritesView.as_view()),
-    path('login/', UserLoginView.as_view()),
-    path('productDetail/', ProductDetailView.as_view()),
-    path('productList/', ProductListView.as_view(), name='Shop-url'),
-    path('shoppingCart/', ShoppingCartView.as_view()),
-    path('registration/', UserRegisterView.as_view(), name='registration-url'),
-    path('make-registration/', UserMakeRegisterView.as_view(), name='make-registration-url'),
-    path('make-login/', UserMakeLoginView.as_view(), name='make-login-url')
-
-]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
