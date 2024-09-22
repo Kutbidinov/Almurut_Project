@@ -77,7 +77,7 @@ class User(models.Model):
 
 
 
-class ProductRating(models.Model):
+class ProductUserRating(models.Model):
     """Модель чтобы зафиксировать, что пользовател поставил оценку для товара!"""
 
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='ratings')

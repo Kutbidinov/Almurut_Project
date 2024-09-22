@@ -1,19 +1,31 @@
 from django.contrib.auth import login, logout
+from django.contrib.auth.views import LoginView
 from django.shortcuts import render
-from django.views.generic import TemplateView
 from django.views import View
+from django.views.generic import TemplateView
+
 from users.models import CustomUser
 
 
-class UserRegisterView(TemplateView):
+class UserRegistrationView(TemplateView):
     template_name = 'register.html'
 
 
-class UserLoginView(TemplateView):
+class LoginPageView(TemplateView):
     template_name = 'login.html'
 
 
+class UserMakeLogoutView(View):
+    """Вью, чтобы выйти из аккаунта"""
+
+    def post(self, request, *args, **kwargs):
+        logout(request)
+        return render(request, 'login.html')
+
+
 class UserMakeLoginView(View):
+    """Вью, чтобы залогинить пользователя"""
+
     def post(self, request, *args, **kwargs):
         data = request.POST
         email = data['email_address']
@@ -32,7 +44,9 @@ class UserMakeLoginView(View):
             return render(request, 'login.html', context={'logged_in': False})
 
 
-class UserMakeRegisterView(View):
+
+class UserMakeRegistrationView(View):
+    """Вью, чтобы зарегистрировать пользователя"""
 
     def post(self, request, *args, **kwargs):
         data = request.POST
@@ -43,7 +57,7 @@ class UserMakeRegisterView(View):
         if password1 == password2:
             blabla = data['first_name']
             last_name = data['last_name']
-            email = data['email']
+            email = data['email_address']
             user = CustomUser.objects.create_user(
                 email=email, password=password1,
                 first_name=blabla, last_name=last_name,
@@ -51,3 +65,4 @@ class UserMakeRegisterView(View):
             return render(request, 'product-list.html')
         else:
             pass
+            # TODO: вызови ошибку для клиента,  о том что пароль подтверждения не совппадаемт
