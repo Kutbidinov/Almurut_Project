@@ -21,7 +21,7 @@ class ProductGalleryInlineAdmin(admin.StackedInline):
 
 @admin.register(Product)
 class ProductGalerry(admin.ModelAdmin):
-    list_display = ['name', 'price', 'seles_persent',]
+    list_display = ['name', 'price', 'sales_percent',]
     search_fields = ['name',]
     inlines = [ProductGalleryInlineAdmin]
 

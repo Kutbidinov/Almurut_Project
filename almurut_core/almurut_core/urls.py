@@ -19,7 +19,8 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from market.views import ProductListView, ProductDetailView, \
-    SendProductFeedbackView
+    SendProductFeedbackView, HomeView
+
 from users.views import UserRegistrationView, UserMakeRegistrationView, \
     LoginPageView, UserMakeLoginView, UserMakeLogoutView
 
@@ -28,6 +29,7 @@ from users.views import UserRegistrationView, UserMakeRegistrationView, \
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('home/', HomeView.as_view(),  name='home_url'),
     path('products/', ProductListView.as_view()),
     path('products/<int:pk>/', ProductDetailView.as_view(), name='product-detail-url'),
 

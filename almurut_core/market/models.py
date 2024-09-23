@@ -21,7 +21,7 @@ class Product(models.Model):
 
     name = models.CharField(max_length=250)
     price = models.PositiveIntegerField(help_text="В сомах", verbose_name='Цена без скидки')
-    seles_persent = models.PositiveSmallIntegerField(verbose_name="Само скидка",
+    sales_percent = models.PositiveSmallIntegerField(verbose_name="Само скидка",
                                                      null=True,
                                                      blank=True,
                                                      validators=[MaxValueValidator(100)])
@@ -45,10 +45,6 @@ class Product(models.Model):
             return self.price
         else:
             return int((self.price / 100) * (100 - self.sales_percent))
-
-
-
-
 
     def __str__(self):
         return self.name

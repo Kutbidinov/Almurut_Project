@@ -8,6 +8,14 @@ from django.views.generic import TemplateView
 from market.models import Product, ProductUserRating
 
 
+class HomeView(TemplateView):
+    template_name = 'index.html'
+
+
+
+
+
+
 class ProductListView(TemplateView):
     template_name = 'product-list.html'
 
@@ -17,6 +25,7 @@ class ProductListView(TemplateView):
             'now': datetime.datetime.now().date()
         }
         return context
+
 
 
 class ProductDetailView(TemplateView):
