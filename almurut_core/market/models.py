@@ -81,5 +81,6 @@ class ProductUserRating(models.Model):
     rating = models.PositiveSmallIntegerField()
     comment = models.TextField(blank=True, null=True)
 
-    def __str__(self):
-        return self.users
+    class Meta:
+        unique_together = ('users', 'product')
+
