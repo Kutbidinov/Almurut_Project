@@ -37,6 +37,39 @@ class ProductDetailView(TemplateView):
         except Product.DoesNotExist:
             raise Http404
 
+        user = self.request.user
+
+        # вычесляем посталенный пользователем рейтинг!
+
+        try:
+            my_product_rating = ProductUserRating.objects.get(product=product, user=user)
+            rating = my_product_rating.rating
+        except ProductUserRating.DoesNotExsit:
+            rating = 0
+
+
+        # Вычисляем средний рейтинг!
+        product_rating_list = ProductUserRating.objects.filter(product=product)
+        total_value = 0
+        for product_rating in product_rating_list:
+            total_value += product_rating.rating
+        if len(product_rating_list) == 0:
+            average_rating = 0
+        else:
+            average_rating = total_value / len(product_rating_list)
+        # альтернативный способ (*сделать и если что извиниться)
+        # try:
+        #     average_rating = total_value / len(product_rating_list)
+        # except ZeroDivisionError:
+        #     average_rating = 0
+
+        product_category = product.category
+        category_other_product_list = (Product.objects.filter(category=product_category.exclude(id=product.id)))
+
+        context = {}
+
+
+
         context = {
             'product': product
         }
