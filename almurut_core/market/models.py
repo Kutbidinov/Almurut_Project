@@ -11,7 +11,7 @@ class ProductCategory(models.Model):
         verbose_name = "Категория Товара"
 
     def __str__(self):
-        return self.name
+        return self.name    
 
 
 class Product(models.Model):
@@ -83,4 +83,25 @@ class ProductUserRating(models.Model):
 
     class Meta:
         unique_together = ('users', 'product')
+
+
+
+
+# class FavoriteProduct(models.Model):
+#     """Модель для хранения избранных товаров пользователя"""
+#     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+#     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+#     added_at = models.DateTimeField(auto_now=True)
+#
+#
+#     class Meta:
+#         unique_together = ('user', 'product')
+#         verbose_name = 'Избранный товар'
+#         verbose_name_plural = 'Избранные товары'
+#
+#     def __str__(self):
+#         return f'{self.user} добавил {self.product} в избранное'
+#
+#
+#
 

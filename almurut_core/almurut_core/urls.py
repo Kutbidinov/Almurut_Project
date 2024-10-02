@@ -45,6 +45,7 @@ urlpatterns = [
     path('shop/', ShopView.as_view(), name='Shop-url'),
     path('fag-page/', FaqView.as_view(), name='Faq-url'),
     path('favorites/', FavoritesView.as_view(), name='favorites-url'),
+    # path('add-')
 
 ]
 

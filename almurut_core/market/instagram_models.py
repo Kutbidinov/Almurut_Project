@@ -24,7 +24,7 @@ class Publication(models.Model):
 
 class Comment(models.Model):
 
-    text = models.TextField()
+    comment_text = models.TextField()
     user = models.ForeignKey(User, on_delete = models.CASCADE, related_name='')
     publication = models.ForeignKey(Publication, on_delete=models.CASCADE, related_name='')
 
@@ -34,7 +34,7 @@ class Comment(models.Model):
 
 
 
-class UserLike(models.Model):
+class Public_Like(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='')
     publication = models.ForeignKey(Publication, on_delete=models.CASCADE, related_name='')

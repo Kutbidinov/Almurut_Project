@@ -1,9 +1,12 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+
 from users.managers import CustomUserManager
 
 class CustomUser(AbstractUser):
     """Кастомная модель для пользователей"""
+
+    from market.models import Product
 
     username = None
     USERNAME_FIELD = 'email'
@@ -15,6 +18,7 @@ class CustomUser(AbstractUser):
     birth_date = models.DateField(null=True)
     avatar = models.ImageField(upload_to='avatars/')
     phone_number = models.CharField(max_length=30)
+    favorite_product = models.ManyToManyField(Product)
 
     objects = CustomUserManager()
 
