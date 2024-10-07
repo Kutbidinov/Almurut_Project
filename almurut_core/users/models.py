@@ -18,7 +18,7 @@ class CustomUser(AbstractUser):
     birth_date = models.DateField(null=True)
     avatar = models.ImageField(upload_to='avatars/')
     phone_number = models.CharField(max_length=30)
-    favorite_product = models.ManyToManyField(Product)
+    favorite_products = models.ManyToManyField(Product)
 
     objects = CustomUserManager()
 

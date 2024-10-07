@@ -94,14 +94,71 @@ class SendProductFeedbackView(View):
         product = Product.objects.get(id=kwargs['pk'])
         user = request.user
         if user.is_authenticated:
-            ProductUserRating.objects.create(
-                rating=rating_value,
-                product=product,
-                user=user,
-            )
-            return redirect(f'products/{product.id}/')
+            try:
+                product_rating = ProductUserRating.obects.get(product=product, user=user)
+            except ProductUserRating.DoesNotExist:
+                # ставим оценку, если не было существующей оценки
+                ProductUserRating.objects.create(
+                    rating=rating_value,
+
+                    product=product,
+
+                    user=user,
+
+                 )
+
+                return redirect('product-detail-url', pk=product.id)
+            # Обновляем оценку пользователя!
+            product_rating.rating = rating_value
+            product_rating.save()
+            return redirect('product-detail-url', pk=product.id)
         else:
             return redirect('/login/')
+
+
+
+
+
+
+
+
+
+
+class FavoriteProductListTemplateView(TemplateView):
+    """Получает список избранных товаров пользователя"""
+    template_name = 'favorites.html'
+
+    def get_context_data(self, **kwargs):
+        user = self.request.user  # получаем пользователя который делает запрос
+        context = {
+            'my_favorite_products': user.favorite_products.all()
+        }
+        return context
+
+
+
+
+
+
+class AddProductToFavoriteView(TemplateView):
+    """Добавляет товар в избранное пользователя"""
+    template_name = 'favorites.html'
+
+    def get_context_data(self, **kwargs):
+        user = self.request.user  # получаем пользователя который делает запрос
+
+        product_id = kwargs['pk']
+        product = Product.objects.get(id=product_id)
+        user.favorite_products.add(product)
+        user.save()
+
+        context = {
+            'my_favorite_products': user.favorite_products.all()
+        }
+        return context
+
+
+
 
 
 

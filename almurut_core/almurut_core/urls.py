@@ -45,7 +45,8 @@ urlpatterns = [
     path('shop/', ShopView.as_view(), name='Shop-url'),
     path('fag-page/', FaqView.as_view(), name='Faq-url'),
     path('favorites/', FavoritesView.as_view(), name='favorites-url'),
-    # path('add-')
+    path('add-product-to-favorite/<int:pk>/', FavoritesView.as_view(), name='add-product-to-favorite-url')
+
 
 ]
 
