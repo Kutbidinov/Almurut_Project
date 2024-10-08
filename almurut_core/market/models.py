@@ -72,12 +72,12 @@ class User(models.Model):
 
 
 
-
 class ProductUserRating(models.Model):
     """Модель чтобы зафиксировать, что пользовател поставил оценку для товара!"""
+    from users.models import CustomUser
 
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='ratings')
-    users = models.ForeignKey(User, on_delete=models.CASCADE)
+    users = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True)
     rating = models.PositiveSmallIntegerField()
     comment = models.TextField(blank=True, null=True)
 
