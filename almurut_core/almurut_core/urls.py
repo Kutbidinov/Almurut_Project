@@ -19,7 +19,9 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from market.views import ProductListView, ProductDetailView, \
-    SendProductFeedbackView, HomeView, ShopView, FaqView, FavoritesView
+    SendProductFeedbackView, HomeView, ShopView, FaqView, FavoriteProductListTemplateView, AddProductToFavoriteView, \
+    RemoveFavoriteView
+
 
 from users.views import UserRegistrationView, UserMakeRegistrationView, \
     LoginPageView, UserMakeLoginView, UserMakeLogoutView
@@ -30,7 +32,7 @@ from users.views import UserRegistrationView, UserMakeRegistrationView, \
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', HomeView.as_view(), name='Home-url'),
-    path('products/', ProductListView.as_view()),
+    path('products/', ProductListView.as_view(), name='products-url'),
     path('products/<int:pk>/', ProductDetailView.as_view(), name='product-detail-url'),
 
     path('products/<int:pk>/send-feedback/', SendProductFeedbackView.as_view(), name='send-feedback-url'),
@@ -44,8 +46,10 @@ urlpatterns = [
     path('make-registration/', UserMakeRegistrationView.as_view(), name='make-registration-url'),
     path('shop/', ShopView.as_view(), name='Shop-url'),
     path('fag-page/', FaqView.as_view(), name='Faq-url'),
-    path('favorites/', FavoritesView.as_view(), name='favorites-url'),
-    path('add-product-to-favorite/<int:pk>/', FavoritesView.as_view(), name='add-product-to-favorite-url')
+    path('favorites/', FavoriteProductListTemplateView.as_view(), name='favorites-url'),
+    path('add-product-to-favorite/<int:pk>/', AddProductToFavoriteView.as_view(), name='add-product-to-favorite-url'),
+    path('remove-favorite/<int:pk>/', RemoveFavoriteView.as_view(), name='remove_favorite_product')
+
 
 
 ]

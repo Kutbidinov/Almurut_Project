@@ -205,16 +205,23 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        {% for item in my_favorite_products %}
+                                            {% for item in my_favorite_products %}
                                             <tr>
-                                                 <td class="li-product-remove"><a href="#"><i class="fa fa-times"></i></a></td>
+                                                <td class="li-product-remove">
+                                                    <form action="{% url 'remove_favorite_product' item.id %}" method="post">
+                                                    {% csrf_token %}
+                                                    <button type="submit" title="Remove"><i class="fa fa-times"></i></button>
+
+                                                    </form>
+                                                </td>
+
                                                 <td class="li-product-thumbnail"><a href="#"><img src="{{ item.preview_image.url }}" alt="здесь должна была быть изображение"></a></td>
                                                 <td class="li-product-name"><a href="#">{{ item.name }}</a></td>
                                                 <td class="li-product-price"><span class="amount">{{ item.get_price_with_sales }} сом</span></td>
                                                 <td class="li-product-add-cart"><a href="#">add to cart</a></td>
                                             </tr>
 
-                                        {% endfor %}
+                                            {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>

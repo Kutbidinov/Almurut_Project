@@ -1,9 +1,10 @@
 import datetime
 
 from django.http import Http404
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.views import View
 from django.views.generic import TemplateView
+from users.models import CustomUser
 
 from market.models import Product, ProductUserRating
 
@@ -84,6 +85,10 @@ class ProductDetailView(TemplateView):
         return context
 
 
+
+
+
+
 class SendProductFeedbackView(View):
     """Вью для сохранения отзыва пользователя для конкретного товара"""
 
@@ -95,7 +100,8 @@ class SendProductFeedbackView(View):
         user = request.user
         if user.is_authenticated:
             try:
-                product_rating = ProductUserRating.obects.get(product=product, user=user)
+                product_rating = ProductUserRating.objects.get(product=product, users=user)
+
             except ProductUserRating.DoesNotExist:
                 # ставим оценку, если не было существующей оценки
                 ProductUserRating.objects.create(
@@ -103,12 +109,13 @@ class SendProductFeedbackView(View):
 
                     product=product,
 
-                    user=user,
+                    users=user,
 
                  )
 
                 return redirect('product-detail-url', pk=product.id)
             # Обновляем оценку пользователя!
+
             product_rating.rating = rating_value
             product_rating.save()
             return redirect('product-detail-url', pk=product.id)
@@ -162,6 +169,46 @@ class AddProductToFavoriteView(TemplateView):
 
 
 
+class RemoveFavoriteView(View):
+    """View to remove an item from your wish list!"""
+
+
+    def post(self, request, pk):
+
+
+        # Получаем текущего пользователя
+        user = request.user
+
+
+        # Получаем продукт по его первичному ключу (pk)
+        product = get_object_or_404(Product, pk=pk)
+
+        print(f'До удаления: {user.favorite_products.all()}')
+
+
+        # Удаляем продукт из избранного
+        user.favorite_products.remove(product)
+
+
+        print(f'После удаления: {user.favorite_products.all()}')
+
+
+        # Перенаправляем на страницу с избранным или другую подходящую страницу
+        return redirect('products-url')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class ShopView(TemplateView):
     template_name = 'shopping-cart.html'
 
@@ -170,5 +217,3 @@ class FaqView(TemplateView):
     template_name = 'faq.html'
 
 
-class FavoritesView(TemplateView):
-    template_name = 'favorites.html'

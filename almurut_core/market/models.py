@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
@@ -28,6 +29,8 @@ class Product(models.Model):
 
 
 
+
+
     description = models.TextField()
     preview_image = models.ImageField(upload_to='products/preview_')
 
@@ -50,6 +53,10 @@ class Product(models.Model):
         return self.name
 
 
+# class Favorite(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     product = models.ForeignKey
+#
 
 
 
