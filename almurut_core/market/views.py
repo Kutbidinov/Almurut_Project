@@ -47,13 +47,15 @@ class ProductDetailView(TemplateView):
             raise Http404
 
         user = self.request.user
+
+        rating = 0
+
         if user.is_authenticated:
 
 
             try:
                 my_product_rating = ProductUserRating.objects.get(product=product, users=user)
                 rating = my_product_rating.rating
-
             except ProductUserRating.DoesNotExist:
                 rating = 0
 

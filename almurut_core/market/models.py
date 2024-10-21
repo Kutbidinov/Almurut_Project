@@ -44,10 +44,11 @@ class Product(models.Model):
     def get_price_with_sales(self):
         """Возвращает цену с учётом скидки"""
 
-        if self.sales_percent == 0:
+        if self.sales_percent is None or self.sales_percent == 0:
             return self.price
-        else:
+
             return int((self.price / 100) * (100 - self.sales_percent))
+
 
     def __str__(self):
         return self.name
