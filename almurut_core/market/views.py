@@ -9,6 +9,9 @@ from users.models import CustomUser
 from market.models import Product, ProductUserRating
 
 
+
+
+
 class HomeView(TemplateView):
     template_name = 'index.html'
 
@@ -44,13 +47,17 @@ class ProductDetailView(TemplateView):
             raise Http404
 
         user = self.request.user
+        if user.is_authenticated:
 
-        # вычисляем поставленный пользователем рейтинг
-        try:
-            my_product_rating = ProductUserRating.objects.get(product=product, users=user)
-            rating = my_product_rating.rating
-        except ProductUserRating.DoesNotExist:
-            rating = 0
+
+            try:
+                my_product_rating = ProductUserRating.objects.get(product=product, users=user)
+                rating = my_product_rating.rating
+
+            except ProductUserRating.DoesNotExist:
+                rating = 0
+
+
 
         # вычисляем средний рейтинг
         product_rating_list = ProductUserRating.objects.filter(product=product)
@@ -98,6 +105,7 @@ class SendProductFeedbackView(View):
 
         product = Product.objects.get(id=kwargs['pk'])
         user = request.user
+
         if user.is_authenticated:
             try:
                 product_rating = ProductUserRating.objects.get(product=product, users=user)
@@ -121,6 +129,7 @@ class SendProductFeedbackView(View):
             return redirect('product-detail-url', pk=product.id)
         else:
             return redirect('/login/')
+
 
 
 

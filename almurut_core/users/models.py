@@ -22,7 +22,6 @@ class CustomUser(AbstractUser):
 
     objects = CustomUserManager()
 
-
     class Meta:
         verbose_name_plural = 'Пользователи'
         verbose_name = 'Пользователь'

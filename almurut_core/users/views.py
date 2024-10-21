@@ -45,6 +45,9 @@ class UserMakeLoginView(View):
 
 
 
+
+
+
 class UserMakeRegistrationView(View):
     """Вью, чтобы зарегистрировать пользователя"""
 

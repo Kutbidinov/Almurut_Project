@@ -53,12 +53,6 @@ class Product(models.Model):
         return self.name
 
 
-# class Favorite(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     product = models.ForeignKey
-#
-
-
 
 
 class ProductGallery(models.Model):
@@ -76,6 +70,14 @@ class User(models.Model):
     name = models.CharField(max_length=250)
     age = models.IntegerField()
     birth_date = models.DateField()
+
+
+
+
+
+
+
+
 
 
 
