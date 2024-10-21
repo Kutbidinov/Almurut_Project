@@ -49,7 +49,6 @@ class Product(models.Model):
 
             return int((self.price / 100) * (100 - self.sales_percent))
 
-
     def __str__(self):
         return self.name
 
